@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MapViewComponent } from './environment/map-view/map-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapViewComponent
   ],
   imports: [
     BrowserModule
