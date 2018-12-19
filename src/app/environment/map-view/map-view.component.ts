@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Initializer } from 'cm-mega-city-game';
-
+import {Component, OnInit} from '@angular/core';
+import { Initializer } from '../../game/Initializer';
+import {Game} from '../../game/Game/Game';
 
 @Component({
   selector: 'app-map-view',
