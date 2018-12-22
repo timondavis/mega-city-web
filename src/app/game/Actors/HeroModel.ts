@@ -16,6 +16,8 @@ export class HeroModel extends Character {
         'AC' : 'Armor Class'
     };
 
+    public Sprite: Phaser.GameObjects.Sprite;
+
     public static get CoreAttributes() { return HeroModel.coreAttributes; }
     public static get PrimaryAttributes() { return HeroModel.primaryAttributes; }
 

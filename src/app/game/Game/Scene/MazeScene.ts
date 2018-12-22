@@ -1,11 +1,13 @@
 import {Game} from '../Game';
 import {MazeNode, C4} from 'cm-maze';
 import {GroupMap} from '../../GameObjects/GroupMap';
-import GameObject = Phaser.GameObjects.GameObject;
+import {HeroService} from '../../Actors/HeroService';
+import {Hero} from '../../Actors/Hero';
 export class MazeScene extends Phaser.Scene {
 
     private tiles: GroupMap;
     private walls: GroupMap;
+    private hero: Hero;
 
     init() {
       this.tiles = new GroupMap(this);
@@ -29,6 +31,17 @@ export class MazeScene extends Phaser.Scene {
         this.createTilesAndWalls();
 
         Phaser.Actions.SetScale(this.tiles.getChildren(), .24);
+        Phaser.Actions.SetDepth(this.tiles.getChildren(), 0);
+        Phaser.Actions.SetDepth(this.walls.getChildren(), 100 );
+
+        // Create hero and put in start node
+        const startNode = Game.Instance.Maze.getStartNode();
+        this.hero = <Hero>this.add.sprite(
+          startNode.getLocation().position[0] * 32 + 16,
+          startNode.getLocation().position[1] * 32 + 16,
+        'hero-down', 1 );
+        this.hero.Model = HeroService.GenerateRandom();
+        this.hero.setDepth(1000);
     }
 
     update() {
@@ -43,10 +56,14 @@ export class MazeScene extends Phaser.Scene {
 
         this.createTile(node, spriteName);
         this.createWallsForTile(node, spriteName);
-
       });
     }
 
+  /**
+   * Create a tile (sprite) and add it to the scene, based on the maze node passed in.
+   * @param node
+   * @param spriteName
+   */
     private createTile(node: MazeNode, spriteName: string) {
       let tile: Phaser.GameObjects.Sprite;
       tile = this.add.sprite(
@@ -58,6 +75,11 @@ export class MazeScene extends Phaser.Scene {
       this.tiles.add(tile, true, tile.name);
     }
 
+  /**
+   * Given a tile sprite, creaate and add the wall sprites to suit it (based on MazeNode)
+   * @param node
+   * @param spriteName
+   */
     private createWallsForTile(node: MazeNode, spriteName: string) {
       node.getOpenConnectionPoints().forEach((value) => {
         const tileCenter = <Phaser.GameObjects.Sprite>this.tiles.getByName(spriteName);
@@ -99,15 +121,8 @@ export class MazeScene extends Phaser.Scene {
 
 
     private createStartAndFinishIndicators() {
-      const startNode = Game.Instance.Maze.getStartNode();
-      const finishNode = Game.Instance.Maze.getFinishNode();
 
-      this['startBoulder'] = this.add.sprite(
-        startNode.getLocation().position[0] * 32 + 16,
-        startNode.getLocation().position[1] * 32 + 16,
-        'boulder2'
-      );
-      this['startBoulder'].depth = 100;
+      const finishNode = Game.Instance.Maze.getFinishNode();
 
       this['finishBoulder'] = this.add.sprite(
         finishNode.getLocation().position[0] * 32 + 16,
