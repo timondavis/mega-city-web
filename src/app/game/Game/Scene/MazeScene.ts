@@ -1,8 +1,10 @@
-import {Game} from '../Game';
+import {MazeGame} from '../MazeGame';
 import {MazeNode, C4} from 'cm-maze';
 import {GroupMap} from '../../GameObjects/GroupMap';
 import {HeroService} from '../../Actors/HeroService';
 import {Hero} from '../../Actors/Hero';
+import {MazeService} from '../MazeService';
+import {TileSprite} from '../../GameObjects/Sprite/Setting/TileSprite';
 export class MazeScene extends Phaser.Scene {
 
     private tiles: GroupMap;
@@ -27,19 +29,16 @@ export class MazeScene extends Phaser.Scene {
     }
 
     create() {
-        this.createStartAndFinishIndicators();
         this.createTilesAndWalls();
+        this.createStartAndFinishIndicators();
 
         Phaser.Actions.SetScale(this.tiles.getChildren(), .24);
         Phaser.Actions.SetDepth(this.tiles.getChildren(), 0);
         Phaser.Actions.SetDepth(this.walls.getChildren(), 100 );
 
         // Create hero and put in start node
-        const startNode = Game.Instance.Maze.getStartNode();
-        this.hero = <Hero>this.add.sprite(
-          startNode.getLocation().position[0] * 32 + 16,
-          startNode.getLocation().position[1] * 32 + 16,
-        'hero-down', 1 );
+        const startPosition = MazeService.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getStartNode());
+        this.hero = <Hero>this.add.sprite( startPosition.x, startPosition.y, 'hero-down', 1 );
         this.hero.Model = HeroService.GenerateRandom();
         this.hero.setDepth(1000);
     }
@@ -48,87 +47,25 @@ export class MazeScene extends Phaser.Scene {
     }
 
   /**
-   * Create the walls and tiles for the maze
+   * Create the walls and tiles for the maze.  Walls are created with tiles, but not strictly bound, so they both get their own grouping.
    */
   private createTilesAndWalls() {
-      Game.Instance.Maze.forEachNode((node: MazeNode) => {
-        const spriteName = 'mazeNode@' + '[' + node.getLocation().position.toString() + ']';
+        MazeGame.getInstance().getMaze().forEachNode((node: MazeNode) => {
+          // Derive new location from maze node, invoke new Tile (and wall) sprites.
+          const location = MazeService.getInstance().nodeToPixel2D(node);
+          const tileSprite = new TileSprite(this, location.x, location.y, 'floor1', node);
 
-        this.createTile(node, spriteName);
-        this.createWallsForTile(node, spriteName);
-      });
-    }
-
-  /**
-   * Create a tile (sprite) and add it to the scene, based on the maze node passed in.
-   * @param node
-   * @param spriteName
-   */
-    private createTile(node: MazeNode, spriteName: string) {
-      let tile: Phaser.GameObjects.Sprite;
-      tile = this.add.sprite(
-        node.getLocation().position[0] * 32 + 16,
-        node.getLocation().position[1] * 32 + 16,
-        'floor1'
-      );
-      tile.name = spriteName;
-      this.tiles.add(tile, true, tile.name);
-    }
-
-  /**
-   * Given a tile sprite, creaate and add the wall sprites to suit it (based on MazeNode)
-   * @param node
-   * @param spriteName
-   */
-    private createWallsForTile(node: MazeNode, spriteName: string) {
-      node.getOpenConnectionPoints().forEach((value) => {
-        const tileCenter = <Phaser.GameObjects.Sprite>this.tiles.getByName(spriteName);
-        const wallName = spriteName + '@wall[' + value + ']';
-        const smallSideScale = 0.1;
-        let wall: Phaser.GameObjects.Sprite;
-        switch (value) {
-          case (C4.NORTH):
-            wall = this.createWall( tileCenter.x, tileCenter.y - 16, value, 'wall1' );
-            break;
-          case (C4.EAST):
-            wall = this.createWall(tileCenter.x + 16, tileCenter.y, value,  'wall1' );
-            break;
-          case (C4.SOUTH):
-            wall = this.createWall( tileCenter.x, tileCenter.y + 16, value,  'wall1' );
-            break;
-          case (C4.WEST):
-            wall = this.createWall(tileCenter.x - 16, tileCenter.y, value, 'wall1' );
-            break;
-          default:
-            throw Error('Direction Not Valid: ' + value);
-        }
-
-        wall.name = wallName;
-        this.walls.add(wall, true, wall.name);
-      });
-    }
-
-    private createWall(x: number, y: number, direction: C4, textureName: string): Phaser.GameObjects.Sprite {
-      const smallSideScale = 0.1;
-      const wall = this.add.sprite(x, y, textureName);
-      if (direction === C4.NORTH || direction === C4.SOUTH ) {
-        wall.setScale(1, smallSideScale);
-      } else {
-        wall.setScale( smallSideScale, 1 );
-      }
-      return wall;
+          // Add tile and wall sprites to scene collection.
+          this.tiles.add(tileSprite, true, tileSprite.getName());
+          tileSprite.getWalls().forEach(wall => this.walls.add(wall, true, wall.getName()));
+        });
     }
 
 
     private createStartAndFinishIndicators() {
 
-      const finishNode = Game.Instance.Maze.getFinishNode();
-
-      this['finishBoulder'] = this.add.sprite(
-        finishNode.getLocation().position[0] * 32 + 16,
-        finishNode.getLocation().position[1] * 32 + 16,
-        'boulder3'
-      );
+      const finishPoint = MazeService.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getFinishNode());
+      this['finishBoulder'] = this.add.sprite( finishPoint.x, finishPoint.y, 'boulder3' );
       this['finishBoulder'].depth = 100;
     }
 }

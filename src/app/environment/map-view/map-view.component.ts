@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Initializer } from '../../game/Initializer';
-import {Game} from '../../game/Game/Game';
+import {MazeGame} from '../../game/Game/MazeGame';
 
 @Component({
   selector: 'app-map-view',
