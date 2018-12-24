@@ -1,16 +1,17 @@
-import { HeroModel } from './HeroModel';
-import { DieBag } from 'cm-check';
+import {DieBag} from 'cm-check';
+import {CharacterModel} from './CharacterModel';
+import {HeroModel} from './HeroModel';
 export class HeroService {
 
     public static GenerateRandom():  HeroModel {
-        const hero = new HeroModel();
+        const hero = new CharacterModel();
 
         Object.keys(HeroModel.CoreAttributes).forEach((key) => {
-            hero.attributes.replace( (<any>HeroModel.CoreAttributes)[key], HeroService.Roll3d6());
+            hero.attributes.replace( (<any>CharacterModel.CoreAttributes)[key], HeroService.Roll3d6());
         });
 
         Object.keys(HeroModel.PrimaryAttributes).forEach((key) => {
-            hero.attributes.replace( (<any>HeroModel.PrimaryAttributes)[key], HeroService.Roll3d6());
+            hero.attributes.replace( (<any>CharacterModel.PrimaryAttributes)[key], HeroService.Roll3d6());
         });
 
         return hero;

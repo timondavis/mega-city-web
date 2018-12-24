@@ -3,13 +3,14 @@ import {MazeNode} from 'cm-maze';
 import {GroupMap} from '../GameObjects/GroupMap';
 import {HeroService} from '../../Actors/HeroService';
 import {TileSprite} from '../GameObjects/Sprite/Setting/TileSprite';
-import {HeroSprite} from '../GameObjects/Sprite/HeroSprite';
 import {MazeSceneHelper} from './MazeSceneHelper';
+import {HeroSprite} from '../GameObjects/Sprite/Actor/HeroSprite';
 
 export class MazeScene extends Phaser.Scene {
 
     private tiles: GroupMap;
     private walls: GroupMap;
+    private monsters: GroupMap;
     private hero: HeroSprite;
 
     private cameraZoom: number;
@@ -21,6 +22,7 @@ export class MazeScene extends Phaser.Scene {
     init() {
         this.tiles = new GroupMap(this);
         this.walls = new GroupMap(this);
+        this.monsters = new GroupMap(this);
         this.cameraZoom = 1;
     }
 
@@ -48,7 +50,7 @@ export class MazeScene extends Phaser.Scene {
         const startPosition = MazeSceneHelper.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getStartNode());
         this.hero = <HeroSprite>this.add.sprite(startPosition.x, startPosition.y, 'hero-down', 1);
         this.hero.setScale(MazeSceneHelper.GLOBAL_SCALE);
-        this.hero.Model = HeroService.GenerateRandom();
+        this.hero.actor = HeroService.GenerateRandom();
         this.hero.setDepth(MazeSceneHelper.ACTOR_DEPTH);
 
         // Create Keyboard Controls

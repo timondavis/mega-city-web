@@ -1,5 +1,5 @@
 import {CharacterModel} from './CharacterModel';
 
-export class HeroModel extends CharacterModel {
+export class MonsterModel extends CharacterModel {
 
 }

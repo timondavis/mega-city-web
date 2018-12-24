@@ -1,6 +1,4 @@
-import {MazeNode, Maze, MazeBuilder} from 'cm-maze';
-import {NameMap} from 'cm-dungeon';
-import {MazeScene} from './Scene/MazeScene';
+import {Maze, MazeBuilder} from 'cm-maze';
 
 export class MazeGame extends Phaser.Game {
 

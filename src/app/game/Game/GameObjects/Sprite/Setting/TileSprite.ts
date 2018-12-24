@@ -1,9 +1,11 @@
 import { MazeNode, C4 } from 'cm-maze';
 import {WallSprite} from './WallSprite';
 import {MazeSceneHelper} from '../../../Scene/MazeSceneHelper';
+import {Actor} from 'cm-dungeon';
 export class TileSprite extends Phaser.GameObjects.Sprite {
   private mazeNode: MazeNode;
   private walls: WallSprite[];
+  private contents: Phaser.GameObjects.Sprite[];
 
   public constructor( scene: Phaser.Scene, x: number, y: number, texture: string, mazeNode: MazeNode) {
     super(scene, x, y, texture);

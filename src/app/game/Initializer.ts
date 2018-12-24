@@ -1,9 +1,9 @@
 import {HeroService} from './Actors/HeroService';
-import {HeroModel} from './Actors/HeroModel';
 import {MazeBuilder, Maze} from 'cm-maze';
 import {MazeGame} from './Game/MazeGame';
 import Game = Phaser.Game;
 import {MazeScene} from './Game/Scene/MazeScene';
+import {HeroModel} from './Actors/HeroModel';
 export class Initializer {
 
     public static Initialize(canvasId: string) {
