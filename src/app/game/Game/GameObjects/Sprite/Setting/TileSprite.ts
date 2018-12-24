@@ -1,6 +1,6 @@
 import { MazeNode, C4 } from 'cm-maze';
-import {MazeService} from '../../../MazeService';
 import {WallSprite} from './WallSprite';
+import {MazeSceneHelper} from '../../../Scene/MazeSceneHelper';
 export class TileSprite extends Phaser.GameObjects.Sprite {
   private mazeNode: MazeNode;
   private walls: WallSprite[];
@@ -27,11 +27,11 @@ export class TileSprite extends Phaser.GameObjects.Sprite {
   }
 
   public get x(): number {
-    return MazeService.getInstance().nodeToPixel2D(this.mazeNode).x;
+    return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).x;
   }
 
   public get y(): number {
-    return MazeService.getInstance().nodeToPixel2D(this.mazeNode).y;
+    return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).y;
   }
 
   public getWalls(): WallSprite[] {

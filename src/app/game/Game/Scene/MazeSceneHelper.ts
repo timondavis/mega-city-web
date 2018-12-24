@@ -1,13 +1,17 @@
 import {MazeNode, NodeLocation, NodeLocation2D} from 'cm-maze';
 import Vector2 = Phaser.Math.Vector2;
-export class MazeService {
-  private static _instance: MazeService;
+
+/**
+ * Singleton class which can help ease integration of objects and systems into the MazeScene
+ */
+export class MazeSceneHelper {
+  private static _instance: MazeSceneHelper;
 
   private constructor() {}
 
-  public static getInstance(): MazeService {
+  public static getInstance(): MazeSceneHelper {
     if (!this._instance) {
-      this._instance = new MazeService();
+      this._instance = new MazeSceneHelper();
     }
      return this._instance;
   }
