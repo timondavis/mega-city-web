@@ -1,5 +1,5 @@
 import { MazeNode, C4 } from 'cm-maze';
-import {MazeService} from '../../../Game/MazeService';
+import {MazeService} from '../../../MazeService';
 import {WallSprite} from './WallSprite';
 export class TileSprite extends Phaser.GameObjects.Sprite {
   private mazeNode: MazeNode;

@@ -1,18 +1,24 @@
 import { NameMap } from 'cm-dungeon';
 import GameObject = Phaser.GameObjects.GameObject;
+
+/**
+ * @class
+ * Extends the Phaser Group, while adding some custom management properties and local methods.
+ * Keeps a named map of all sprites in the group for quick reference.
+ */
 export class GroupMap extends Phaser.GameObjects.Group {
-  private _map: NameMap<GameObject>;
+  private map: NameMap<GameObject>;
 
   public constructor(scene: Phaser.Scene, children?: Phaser.GameObjects.GameObject[] | GroupConfig | GroupCreateConfig,
                      config?: GroupConfig | GroupCreateConfig) {
     super(scene, children, config);
-    this._map = new NameMap();
+    this.map = new NameMap();
   }
 
   public add(child: GameObject, addToScene?: boolean, name?: string): Phaser.GameObjects.Group {
     const group = super.add(child, addToScene);
     if (name) {
-      this._map.add(name, child);
+      this.map.add(name, child);
     }
     return group;
   }
@@ -23,6 +29,6 @@ export class GroupMap extends Phaser.GameObjects.Group {
    * @return {GameObject}
    */
   public getByName(name: string): GameObject {
-    return this._map.get(name);
+    return this.map.get(name);
   }
 }

@@ -1,15 +1,15 @@
 import {MazeGame} from '../MazeGame';
 import {MazeNode, C4} from 'cm-maze';
-import {GroupMap} from '../../GameObjects/GroupMap';
+import {GroupMap} from '../GameObjects/GroupMap';
 import {HeroService} from '../../Actors/HeroService';
-import {Hero} from '../../Actors/Hero';
 import {MazeService} from '../MazeService';
-import {TileSprite} from '../../GameObjects/Sprite/Setting/TileSprite';
+import {TileSprite} from '../GameObjects/Sprite/Setting/TileSprite';
+import {HeroSprite} from '../GameObjects/Sprite/HeroSprite';
 export class MazeScene extends Phaser.Scene {
 
     private tiles: GroupMap;
     private walls: GroupMap;
-    private hero: Hero;
+    private hero: HeroSprite;
 
     init() {
       this.tiles = new GroupMap(this);
@@ -38,7 +38,7 @@ export class MazeScene extends Phaser.Scene {
 
         // Create hero and put in start node
         const startPosition = MazeService.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getStartNode());
-        this.hero = <Hero>this.add.sprite( startPosition.x, startPosition.y, 'hero-down', 1 );
+        this.hero = <HeroSprite>this.add.sprite( startPosition.x, startPosition.y, 'hero-down', 1 );
         this.hero.Model = HeroService.GenerateRandom();
         this.hero.setDepth(1000);
     }
