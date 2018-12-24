@@ -1,6 +1,6 @@
 import {ActorSprite} from '../ActorSprite';
 import {Character} from 'cm-dungeon';
 
-export class CharacterSprite extends ActorSprite {
+export abstract class CharacterSprite extends ActorSprite {
     public actor: Character;
 }

@@ -1,6 +1,10 @@
 import { Character } from 'cm-dungeon';
 export class CharacterModel extends Character {
 
+    /**
+     * Intentionally open JSON so that it can be loaded from an outside source.
+     * Properties are integrated into the model properly in the constructor.
+     */
     private static coreAttributes = {
         'STR' : 'Strength',
         'DEX' : 'Dexterity',
@@ -10,6 +14,10 @@ export class CharacterModel extends Character {
         'CHA' : 'Charisma'
     };
 
+    /**
+     * Intentionally open JSON so that it can be loaded from an outside source.
+     * Properties are integrated into the model properly in the constructor.
+     */
     private static primaryAttributes = {
         'HP' : 'Hit Points',
         'MAX_HP' : 'Maximum Hit Points',
