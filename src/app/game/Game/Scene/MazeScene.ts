@@ -7,16 +7,15 @@ import {HeroSprite} from '../GameObjects/Sprite/HeroSprite';
 import {MazeSceneHelper} from './MazeSceneHelper';
 export class MazeScene extends Phaser.Scene {
 
-    public static readonly TILE_SCALE = 0.24;
-    public static readonly TILE_DEPTH = 0;
-
-    public static readonly WALL_DEPTH = 100;
-
-    public static readonly ACTOR_DEPTH = 1000;
-
     private tiles: GroupMap;
     private walls: GroupMap;
     private hero: HeroSprite;
+
+    private zoomLevel = 1;
+
+    private cursors: Phaser.Input.Keyboard.CursorKeys;
+    private zoomInKey: Phaser.Input.Keyboard.Key;
+    private zoomOutKey: Phaser.Input.Keyboard.Key;
 
 
     init() {
@@ -40,18 +39,51 @@ export class MazeScene extends Phaser.Scene {
         this.createTilesAndWalls();
         this.createStartAndFinishIndicators();
 
-        Phaser.Actions.SetScale( this.tiles.getChildren(), MazeScene.TILE_SCALE );
-        Phaser.Actions.SetDepth( this.tiles.getChildren(), MazeScene.TILE_DEPTH );
-        Phaser.Actions.SetDepth( this.walls.getChildren(), MazeScene.WALL_DEPTH );
+        Phaser.Actions.SetScale( this.tiles.getChildren(), MazeSceneHelper.TILE_SCALE );
+        Phaser.Actions.SetDepth( this.tiles.getChildren(), MazeSceneHelper.TILE_DEPTH );
+        Phaser.Actions.SetDepth( this.walls.getChildren(), MazeSceneHelper.WALL_DEPTH );
 
         // Create hero and put in start node
         const startPosition = MazeSceneHelper.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getStartNode());
         this.hero = <HeroSprite>this.add.sprite( startPosition.x, startPosition.y, 'hero-down', 1 );
+        this.hero.setScale(MazeSceneHelper.GLOBAL_SCALE);
         this.hero.Model = HeroService.GenerateRandom();
-        this.hero.setDepth(MazeScene.ACTOR_DEPTH);
+        this.hero.setDepth(MazeSceneHelper.ACTOR_DEPTH);
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.zoomInKey = this.input.keyboard.addKey('z');
+        this.zoomOutKey = this.input.keyboard.addKey('q');
+
     }
 
     update() {
+
+        // Camera Scroll Speed
+        const scrollSpeed = 5;
+
+        if (this.cursors.up.isDown) {
+          this.cameras.main.scrollY -= scrollSpeed;
+        }
+        if (this.cursors.down.isDown) {
+          this.cameras.main.scrollY += scrollSpeed;
+        }
+        if (this.cursors.left.isDown) {
+          this.cameras.main.scrollX -= scrollSpeed;
+        }
+        if (this.cursors.right.isDown) {
+          this.cameras.main.scrollX += scrollSpeed;
+        }
+
+        let newZoomLevel = this.zoomLevel;
+        if (this.zoomInKey.isDown ) {
+          newZoomLevel += .01;
+        }
+        if (this.zoomOutKey.isDown) {
+          newZoomLevel -= .01;
+        }
+        this.zoomLevel = Phaser.Math.Clamp(newZoomLevel, 0.5, 2);
+
+        this.cameras.main.setZoom(this.zoomLevel);
     }
 
   /**
@@ -74,7 +106,8 @@ export class MazeScene extends Phaser.Scene {
 
       const finishPoint = MazeSceneHelper.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getFinishNode());
       this['finishBoulder'] = this.add.sprite( finishPoint.x, finishPoint.y, 'boulder3' );
-      this['finishBoulder'].depth = 100;
+      this['finishBoulder'].depth = MazeSceneHelper.ACTOR_DEPTH;
+      this['finishBoulder'].setScale(MazeSceneHelper.GLOBAL_SCALE);
     }
 }
 

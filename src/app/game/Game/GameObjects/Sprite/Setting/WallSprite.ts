@@ -1,5 +1,6 @@
 import { C4 } from 'cm-maze';
 import {TileSprite} from './TileSprite';
+import {MazeSceneHelper} from '../../../Scene/MazeSceneHelper';
 export class WallSprite extends Phaser.GameObjects.Sprite {
 
   private exitPosition: C4;
@@ -15,20 +16,20 @@ export class WallSprite extends Phaser.GameObjects.Sprite {
       this.exitPosition = exitPosition;
         switch (this.exitPosition) {
           case (C4.NORTH):
-            this.setPosition(tile.x, tile.y - 16);
-            this.setScale(1, .1);
+            this.setPosition(tile.x, tile.y - (MazeSceneHelper.TILE_WIDTH / 2));
+            this.setScale(MazeSceneHelper.WALL_WIDE_SCALE, MazeSceneHelper.WALL_THIN_SCALE);
             break;
           case (C4.EAST):
-            this.setPosition(tile.x + 16, tile.y );
-            this.setScale(.1, 1);
+            this.setPosition(tile.x + (MazeSceneHelper.TILE_WIDTH / 2), tile.y );
+            this.setScale(MazeSceneHelper.WALL_THIN_SCALE, MazeSceneHelper.WALL_WIDE_SCALE);
             break;
           case (C4.SOUTH):
-            this.setPosition( tile.x, tile.y + 16 );
-            this.setScale(1, .1);
+            this.setPosition( tile.x, tile.y + (MazeSceneHelper.TILE_WIDTH / 2));
+            this.setScale(MazeSceneHelper.WALL_WIDE_SCALE, MazeSceneHelper.WALL_THIN_SCALE);
             break;
           case (C4.WEST):
-            this.setPosition( tile.x - 16, tile.y );
-            this.setScale(.1, 1);
+            this.setPosition( tile.x - (MazeSceneHelper.TILE_WIDTH / 2), tile.y );
+            this.setScale(MazeSceneHelper.WALL_THIN_SCALE, MazeSceneHelper.WALL_WIDE_SCALE);
             break;
           default:
             throw Error('Direction Not Valid: ' + exitPosition);
