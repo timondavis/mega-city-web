@@ -22,6 +22,12 @@ export class MazeSceneHelper {
 
   public static get ACTOR_DEPTH(): number { return 1000; }
 
+  public static get CAMERA_MAX_ZOOM(): number { return 2; }
+  public static get CAMERA_MIN_ZOOM(): number { return 0.5; }
+  public static get CAMERA_ZOOM_INCREMENT(): number { return 0.01; }
+  public static get CAMERA_SCROLL_RATE(): number { return 5; }
+
+
   public static getInstance(): MazeSceneHelper {
     if (!this._instance) {
       this._instance = new MazeSceneHelper();
