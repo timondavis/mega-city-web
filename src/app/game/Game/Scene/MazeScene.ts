@@ -11,6 +11,7 @@ export class MazeScene extends Phaser.Scene {
     private tiles: GroupMap;
     private walls: GroupMap;
     private monsters: GroupMap;
+    private monster: Phaser.GameObjects.Sprite;
     private hero: HeroSprite;
 
     private cameraZoom: number;
@@ -23,7 +24,7 @@ export class MazeScene extends Phaser.Scene {
         this.tiles = new GroupMap(this);
         this.walls = new GroupMap(this);
         this.monsters = new GroupMap(this);
-        this.cameraZoom = 1;
+        this.cameraZoom = .5;
     }
 
     preload() {
@@ -36,6 +37,8 @@ export class MazeScene extends Phaser.Scene {
         this.load.spritesheet('hero-left', 'resource/actor/player/player1left_strip16.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('hero-down', 'resource/actor/player/player1down_strip16.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('hero-right', 'resource/actor/player/player1right_strip16.png', {frameWidth: 32, frameHeight: 32});
+
+        this.load.multiatlas('bug3', 'resource/monster/Bug3/bug.json', 'resource/monster/Bug3/');
     }
 
     create() {
@@ -57,10 +60,34 @@ export class MazeScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.zoomInKey = this.input.keyboard.addKey('z');
         this.zoomOutKey = this.input.keyboard.addKey('q');
+
+        // Create Monster
+        this.monster = this.add.sprite(20, 20, 'bug3', 'bug01.png');
+        this.monster.setDepth(1001);
+        this.monster.setScale(1);
+
+        // Create monster animation frames
+        const frames =  this.anims.generateFrameNames('bug3', {
+                start: 1,
+                end: 14,
+                zeroPad: 2,
+                prefix: 'bug',
+                suffix: '.png'
+            });
+        const animation = this.anims.create({
+            key: 'crawl',
+            frames: frames,
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.monster.anims.play('crawl');
+
+
+
     }
 
     update() {
-
        this.doAllCameraControls();
     }
 
