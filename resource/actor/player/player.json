@@ -1,0 +1,1490 @@
+{
+	"textures": [
+		{
+			"image": "player-0.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1039,
+				"h": 254
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Demo.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 144,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 144,
+						"h": 144
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 144,
+						"h": 144
+					}
+				},
+				{
+					"filename": "DemoBattler-4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 57,
+						"h": 63
+					},
+					"frame": {
+						"x": 1,
+						"y": 147,
+						"w": 57,
+						"h": 63
+					}
+				},
+				{
+					"filename": "DemoBattler-51.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 62,
+						"h": 41
+					},
+					"frame": {
+						"x": 1,
+						"y": 212,
+						"w": 62,
+						"h": 41
+					}
+				},
+				{
+					"filename": "DemoBattler-5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 57,
+						"h": 63
+					},
+					"frame": {
+						"x": 60,
+						"y": 147,
+						"w": 57,
+						"h": 63
+					}
+				},
+				{
+					"filename": "DemoBattler-52.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 62,
+						"h": 41
+					},
+					"frame": {
+						"x": 65,
+						"y": 212,
+						"w": 62,
+						"h": 41
+					}
+				},
+				{
+					"filename": "DemoBattler-17.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 54,
+						"h": 63
+					},
+					"frame": {
+						"x": 119,
+						"y": 147,
+						"w": 54,
+						"h": 63
+					}
+				},
+				{
+					"filename": "DemoBattler-53.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 62,
+						"h": 41
+					},
+					"frame": {
+						"x": 129,
+						"y": 212,
+						"w": 62,
+						"h": 41
+					}
+				},
+				{
+					"filename": "DemoBattler-31.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 56,
+						"h": 64
+					},
+					"frame": {
+						"x": 147,
+						"y": 1,
+						"w": 56,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-32.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 56,
+						"h": 64
+					},
+					"frame": {
+						"x": 147,
+						"y": 67,
+						"w": 56,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 175,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 42,
+						"h": 48
+					},
+					"frame": {
+						"x": 193,
+						"y": 199,
+						"w": 42,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 205,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 205,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 232,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 41,
+						"h": 48
+					},
+					"frame": {
+						"x": 237,
+						"y": 199,
+						"w": 41,
+						"h": 48
+					}
+				},
+				{
+					"filename": "$DemoWalk-6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 48
+					},
+					"frame": {
+						"x": 280,
+						"y": 199,
+						"w": 41,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-15.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 262,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 262,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-21.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 289,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 48
+					},
+					"frame": {
+						"x": 323,
+						"y": 199,
+						"w": 41,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-27.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 319,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-28.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 319,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-29.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 346,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 40,
+						"h": 48
+					},
+					"frame": {
+						"x": 366,
+						"y": 199,
+						"w": 40,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 376,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-30.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 376,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-39.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 403,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 40,
+						"h": 48
+					},
+					"frame": {
+						"x": 408,
+						"y": 199,
+						"w": 40,
+						"h": 48
+					}
+				},
+				{
+					"filename": "$DemoWalk-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 0,
+						"w": 32,
+						"h": 48
+					},
+					"frame": {
+						"x": 450,
+						"y": 199,
+						"w": 32,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-45.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 433,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-46.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 433,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-47.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 460,
+						"y": 133,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 0,
+						"w": 32,
+						"h": 48
+					},
+					"frame": {
+						"x": 484,
+						"y": 199,
+						"w": 32,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-48.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 490,
+						"y": 1,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 55,
+						"h": 64
+					},
+					"frame": {
+						"x": 490,
+						"y": 67,
+						"w": 55,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-16.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 517,
+						"y": 133,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 32,
+						"h": 48
+					},
+					"frame": {
+						"x": 518,
+						"y": 199,
+						"w": 32,
+						"h": 48
+					}
+				},
+				{
+					"filename": "$DemoWalk-9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 32,
+						"h": 48
+					},
+					"frame": {
+						"x": 552,
+						"y": 199,
+						"w": 32,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-36.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 547,
+						"y": 1,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-37.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 547,
+						"y": 67,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-38.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 573,
+						"y": 133,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "$DemoWalk-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 31,
+						"h": 48
+					},
+					"frame": {
+						"x": 586,
+						"y": 199,
+						"w": 31,
+						"h": 48
+					}
+				},
+				{
+					"filename": "$DemoWalk-10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 31,
+						"h": 48
+					},
+					"frame": {
+						"x": 619,
+						"y": 199,
+						"w": 31,
+						"h": 48
+					}
+				},
+				{
+					"filename": "DemoBattler-49.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 603,
+						"y": 1,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-50.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 54,
+						"h": 64
+					},
+					"frame": {
+						"x": 603,
+						"y": 67,
+						"w": 54,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 629,
+						"y": 133,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoDamage-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 6,
+						"w": 35,
+						"h": 42
+					},
+					"frame": {
+						"x": 652,
+						"y": 199,
+						"w": 35,
+						"h": 42
+					}
+				},
+				{
+					"filename": "DemoBattler-18.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 659,
+						"y": 1,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-19.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 659,
+						"y": 67,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-20.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 683,
+						"y": 133,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoDamage-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 6,
+						"w": 35,
+						"h": 42
+					},
+					"frame": {
+						"x": 689,
+						"y": 199,
+						"w": 35,
+						"h": 42
+					}
+				},
+				{
+					"filename": "DemoDamage-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 6,
+						"w": 35,
+						"h": 42
+					},
+					"frame": {
+						"x": 726,
+						"y": 199,
+						"w": 35,
+						"h": 42
+					}
+				},
+				{
+					"filename": "DemoBattler-22.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 713,
+						"y": 1,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-23.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 713,
+						"y": 67,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-40.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 737,
+						"y": 133,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-41.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 767,
+						"y": 1,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 767,
+						"y": 67,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 791,
+						"y": 133,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 52,
+						"h": 64
+					},
+					"frame": {
+						"x": 821,
+						"y": 1,
+						"w": 52,
+						"h": 64
+					}
+				},
+				{
+					"filename": "DemoBattler-13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 1,
+						"w": 52,
+						"h": 63
+					},
+					"frame": {
+						"x": 821,
+						"y": 67,
+						"w": 52,
+						"h": 63
+					}
+				},
+				{
+					"filename": "DemoBattler-14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 1,
+						"w": 52,
+						"h": 63
+					},
+					"frame": {
+						"x": 845,
+						"y": 132,
+						"w": 52,
+						"h": 63
+					}
+				},
+				{
+					"filename": "DemoBattler-24.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 875,
+						"y": 1,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-25.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 875,
+						"y": 64,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-26.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 899,
+						"y": 127,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-33.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 899,
+						"y": 190,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-34.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 930,
+						"y": 1,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-35.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 930,
+						"y": 64,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-42.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 954,
+						"y": 127,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-43.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 954,
+						"y": 190,
+						"w": 53,
+						"h": 61
+					}
+				},
+				{
+					"filename": "DemoBattler-44.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 53,
+						"h": 61
+					},
+					"frame": {
+						"x": 985,
+						"y": 1,
+						"w": 53,
+						"h": 61
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a4ea2b1bf39ef808504a1c5fc401ed71:2a90639c9a6a5ff3d8679ad9ed51f238:95162a1ab6b6297b1e671da3cedc2be3$"
+	}
+}

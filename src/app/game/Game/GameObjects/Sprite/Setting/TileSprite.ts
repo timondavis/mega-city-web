@@ -1,48 +1,78 @@
-import { MazeNode, C4 } from 'cm-maze';
+import {MazeNode, C4} from 'cm-maze';
 import {WallSprite} from './WallSprite';
 import {MazeSceneHelper} from '../../../Scene/MazeSceneHelper';
-import {Actor} from 'cm-dungeon';
+import {NameMap} from 'cm-dungeon';
+import {MonsterSprite} from '../Actor/Character/MonsterSprite';
+
 export class TileSprite extends Phaser.GameObjects.Sprite {
-  private mazeNode: MazeNode;
-  private walls: WallSprite[];
-  private contents: Phaser.GameObjects.Sprite[];
 
-  public constructor( scene: Phaser.Scene, x: number, y: number, texture: string, mazeNode: MazeNode) {
-    super(scene, x, y, texture);
-    this.walls = [null, null, null, null];
-    this.setMazeNode(mazeNode);
-  }
+    // get/set maze node
+    public get mazeNode(): MazeNode {
+        return this.getData('mazeNode');
+    }
+    public set mazeNode(value: MazeNode) {
+        this.setData('mazeNode', value);
+    }
 
-  public getMazeNode(): MazeNode {
-    return this.mazeNode;
-  }
+    // get/set walls on tile
+    public get walls(): WallSprite[] {
+        return this.getData('walls');
+    }
+    public set walls(value: WallSprite[]) {
+        this.setData('walls', value);
+    }
 
-  public setMazeNode(mazeNode: MazeNode): TileSprite {
-    this.mazeNode = mazeNode;
-    this.setPosition(this.x, this.y);
-    this.createWalls();
-    return this;
-  }
+    // get set name of tile
+    public get name(): string {
+        return this.getData('name');
+    }
+    public set name(value: string) {
+        this.setData('name', value);
+    }
 
-  public getName(): string {
-    return 'mazeNode@' + '[' + this.mazeNode.getLocation().getPosition().toString() + ']';
-  }
+    public constructor(scene: Phaser.Scene, x: number, y: number, texture: string, mazeNode: MazeNode) {
+        super(scene, x, y, texture);
+        this.setData('walls', [null, null, null, null]);
+        this.setData('mazeNode', mazeNode);
+        this.setData('monsters', new NameMap<MonsterSprite>());
+        this.setData('name', this.getName());
+        this.setMazeNode(mazeNode);
+    }
 
-  public get x(): number {
-    return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).x;
-  }
+    public get monsters(): NameMap<MonsterSprite> {
+        return this.data.get('monsters');
+    }
 
-  public get y(): number {
-    return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).y;
-  }
+    public getMazeNode(): MazeNode {
+        return this.mazeNode;
+    }
 
-  public getWalls(): WallSprite[] {
-    return this.walls.filter(x => x !== null );
-  }
+    public setMazeNode(mazeNode: MazeNode): TileSprite {
+        this.mazeNode = mazeNode;
+        this.setPosition(this.x, this.y);
+        this.createWalls();
+        return this;
+    }
 
-  private createWalls() {
-    this.mazeNode.getOpenConnectionPoints().forEach((directionValue) => {
-      this.walls[directionValue] = new WallSprite(this.scene, this.x, this.y, 'wall1', this, directionValue);
-    });
-  }
+    private getName(): string {
+        return 'mazeNode@' + '[' + this.mazeNode.getLocation().getPosition().toString() + ']';
+    }
+
+    public get x(): number {
+        return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).x;
+    }
+
+    public get y(): number {
+        return MazeSceneHelper.getInstance().nodeToPixel2D(this.mazeNode).y;
+    }
+
+    public getExistingWalls(): WallSprite[] {
+        return this.walls.filter(x => x !== null);
+    }
+
+    private createWalls() {
+        this.mazeNode.getOpenConnectionPoints().forEach((directionValue) => {
+            this.walls[directionValue] = new WallSprite(this.scene, this.x, this.y, 'wall1', this, directionValue);
+        });
+    }
 }

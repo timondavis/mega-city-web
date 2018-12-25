@@ -1,0 +1,83 @@
+{
+	"textures": [
+		{
+			"image": "robot.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 150,
+				"h": 50
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "grumpyrobot-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 48
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 48,
+						"h": 48
+					}
+				},
+				{
+					"filename": "grumpyrobot-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 48
+					},
+					"frame": {
+						"x": 51,
+						"y": 1,
+						"w": 48,
+						"h": 48
+					}
+				},
+				{
+					"filename": "grumpyrobot-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 48
+					},
+					"frame": {
+						"x": 101,
+						"y": 1,
+						"w": 48,
+						"h": 48
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e640f4e66cc125104fc41b804179fd74:a0752638400e7f897bfe951b150f4531:a304e87a8f03f133e4f637a0c46d3aed$"
+	}
+}

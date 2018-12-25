@@ -1,24 +1,29 @@
 import {MazeGame} from '../MazeGame';
 import {MazeNode} from 'cm-maze';
 import {GroupMap} from '../GameObjects/GroupMap';
-import {HeroService} from '../../Actors/HeroService';
 import {TileSprite} from '../GameObjects/Sprite/Setting/TileSprite';
 import {MazeSceneHelper} from './MazeSceneHelper';
 import {HeroSprite} from '../GameObjects/Sprite/Actor/HeroSprite';
+import {MonsterSprite} from '../GameObjects/Sprite/Actor/Character/MonsterSprite';
+import {WallSprite} from '../GameObjects/Sprite/Setting/WallSprite';
 
 export class MazeScene extends Phaser.Scene {
 
-    private tiles: GroupMap;
-    private walls: GroupMap;
-    private monsters: GroupMap;
-    private monster: Phaser.GameObjects.Sprite;
+    private tiles: GroupMap<TileSprite>;
+    private walls: GroupMap<WallSprite>;
+    private monsters: GroupMap<MonsterSprite>;
+    private monster: MonsterSprite;
     private hero: HeroSprite;
+
+    private isControlsLocked = false;
+    private isProcessingTurn = false;
 
     private cameraZoom: number;
 
     private cursors: Phaser.Input.Keyboard.CursorKeys;
     private zoomInKey: Phaser.Input.Keyboard.Key;
     private zoomOutKey: Phaser.Input.Keyboard.Key;
+    private turnKey: Phaser.Input.Keyboard.Key;
 
     init() {
         this.tiles = new GroupMap(this);
@@ -33,11 +38,7 @@ export class MazeScene extends Phaser.Scene {
         this.load.image('boulder2', 'resource/boulder/boulder2.png');
         this.load.image('boulder3', 'resource/boulder/boulder3.png');
 
-        this.load.spritesheet('hero-up', 'resource/actor/player/player1up_strip16.png', {frameWidth: 32, frameHeight: 32});
-        this.load.spritesheet('hero-left', 'resource/actor/player/player1left_strip16.png', {frameWidth: 32, frameHeight: 32});
-        this.load.spritesheet('hero-down', 'resource/actor/player/player1down_strip16.png', {frameWidth: 32, frameHeight: 32});
-        this.load.spritesheet('hero-right', 'resource/actor/player/player1right_strip16.png', {frameWidth: 32, frameHeight: 32});
-
+        this.load.multiatlas( 'gernard', 'resource/monster/gernard/gernard.json', 'resource/monster/gernard/');
         this.load.multiatlas('bug3', 'resource/monster/Bug3/bug.json', 'resource/monster/Bug3/');
     }
 
@@ -49,46 +50,66 @@ export class MazeScene extends Phaser.Scene {
         Phaser.Actions.SetDepth(this.tiles.getChildren(), MazeSceneHelper.TILE_DEPTH);
         Phaser.Actions.SetDepth(this.walls.getChildren(), MazeSceneHelper.WALL_DEPTH);
 
-        // Create hero and put in start node
-        const startPosition = MazeSceneHelper.getInstance().nodeToPixel2D(MazeGame.getInstance().getMaze().getStartNode());
-        this.hero = <HeroSprite>this.add.sprite(startPosition.x, startPosition.y, 'hero-down', 1);
-        this.hero.setScale(MazeSceneHelper.GLOBAL_SCALE);
-        this.hero.actor = HeroService.GenerateRandom();
-        this.hero.setDepth(MazeSceneHelper.ACTOR_DEPTH);
-
         // Create Keyboard Controls
         this.cursors = this.input.keyboard.createCursorKeys();
         this.zoomInKey = this.input.keyboard.addKey('z');
         this.zoomOutKey = this.input.keyboard.addKey('q');
 
-        // Create Monster
-        this.monster = this.add.sprite(20, 20, 'bug3', 'bug01.png');
-        this.monster.setDepth(1001);
-        this.monster.setScale(1);
+        this.turnKey = this.input.keyboard.addKey('space');
 
-        // Create monster animation frames
-        const frames =  this.anims.generateFrameNames('bug3', {
-                start: 1,
-                end: 14,
-                zeroPad: 2,
-                prefix: 'bug',
-                suffix: '.png'
-            });
+        // Create Monster
+        const tile = MazeSceneHelper.getRandomTile(this.tiles);
+        const monster = new MonsterSprite(this, tile.x, tile.y, 'gernard', 'Gernard-0.png');
+        tile.monsters.add(monster.texture.key, monster);
+        this.monsters.add(monster, true, 'gernard');
+        this.monsters.setDepth(1001, 1);
+
+        this.monster = (<MonsterSprite>this.monsters.getChildren()[0]);
+
+        this.monster.loadAnimationFrames(
+            'Gernard-',
+            '.png',
+            'gernard',
+            0, 3
+        );
+
         const animation = this.anims.create({
-            key: 'crawl',
-            frames: frames,
-            frameRate: 10,
+            key: 'gernard-walk',
+            frames: this.monster.frameNames,
+            frameRate: 3,
             repeat: -1
         });
 
-        this.monster.anims.play('crawl');
-
-
+        this.monster.setScale(1);
 
     }
 
     update() {
-       this.doAllCameraControls();
+
+        if ( !this.isControlsLocked ) {
+            this.doAllCameraControls();
+            this.doPlayerCommands();
+            return;
+        }
+
+        this.processTurn();
+    }
+
+    private doPlayerCommands() {
+
+        if (this.turnKey.isDown) {
+            this.isControlsLocked = true;
+            Phaser.Actions.Call(this.tiles.getChildren(), (tile: TileSprite) => {
+                Phaser.Actions.Call(tile.monsters.toArray(), (monster: MonsterSprite) => {
+                    monster.walkRandom(tile);
+                    monster.anims.play('gernard-walk');
+                }, this);
+            }, this);
+        }
+    }
+
+    private processTurn() {
+            this.isProcessingTurn = true;
     }
 
     /**
@@ -101,8 +122,8 @@ export class MazeScene extends Phaser.Scene {
             const tileSprite = new TileSprite(this, location.x, location.y, 'floor1', node);
 
             // Add tile and wall sprites to scene collection.
-            this.tiles.add(tileSprite, true, tileSprite.getName());
-            tileSprite.getWalls().forEach(wall => this.walls.add(wall, true, wall.getName()));
+            this.tiles.add(tileSprite, true, tileSprite.name);
+            tileSprite.getExistingWalls().forEach(wall => this.walls.add(wall, true, wall.name));
         });
     }
 

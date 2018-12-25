@@ -6,8 +6,8 @@ import GameObject = Phaser.GameObjects.GameObject;
  * Extends the Phaser Group, while adding some custom management properties and local methods.
  * Keeps a named map of all sprites in the group for quick reference.
  */
-export class GroupMap extends Phaser.GameObjects.Group {
-  private map: NameMap<GameObject>;
+export class GroupMap<E extends GameObject> extends Phaser.GameObjects.Group {
+  private map: NameMap<E>;
 
   public constructor(scene: Phaser.Scene, children?: Phaser.GameObjects.GameObject[] | GroupConfig | GroupCreateConfig,
                      config?: GroupConfig | GroupCreateConfig) {
@@ -18,7 +18,7 @@ export class GroupMap extends Phaser.GameObjects.Group {
   public add(child: GameObject, addToScene?: boolean, name?: string): Phaser.GameObjects.Group {
     const group = super.add(child, addToScene);
     if (name) {
-      this.map.add(name, child);
+      this.map.add(name, (<E>child));
     }
     return group;
   }
