@@ -1,8 +1,10 @@
 import {CharacterSprite} from './CharacterSprite';
 import {TileSprite} from '../../Setting/TileSprite';
 import {C4} from 'cm-maze';
+import {GroupMap} from '../../../GroupMap';
 
 export class MonsterSprite extends CharacterSprite {
+
 
     private _framePrefix: string;
     public get framePrefix(): string { return this.framePrefix; }
@@ -16,7 +18,16 @@ export class MonsterSprite extends CharacterSprite {
     private _atlasName: string;
     public get atlasName(): string { return this._atlasName; }
 
-    private turnDirection: C4;
+    private _turnDirection: C4;
+    private _targetTile: TileSprite;
+
+    public get turnDirection(): C4 {
+        return this._turnDirection;
+    }
+
+    public get targetTile(): TileSprite {
+        return this._targetTile;
+    }
 
     /**
      * Walk in the given direction on the next turn
@@ -25,7 +36,10 @@ export class MonsterSprite extends CharacterSprite {
      */
     public walk(currentTile: TileSprite, direction: C4): void {
         if (currentTile.getMazeNode().isConnectionPointOccupied(direction)) {
-            this.turnDirection = direction;
+            this._turnDirection = direction;
+            this._targetTile = this.scene.data.get('tiles').getByName(
+                'MazeNode@' + currentTile.getMazeNode().getNeighborAt(direction).getName()
+            );
         }
     }
 

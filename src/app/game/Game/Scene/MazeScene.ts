@@ -1,5 +1,5 @@
 import {MazeGame} from '../MazeGame';
-import {MazeNode} from 'cm-maze';
+import {MazeNode, C4} from 'cm-maze';
 import {GroupMap} from '../GameObjects/GroupMap';
 import {TileSprite} from '../GameObjects/Sprite/Setting/TileSprite';
 import {MazeSceneHelper} from './MazeSceneHelper';
@@ -9,14 +9,34 @@ import {WallSprite} from '../GameObjects/Sprite/Setting/WallSprite';
 
 export class MazeScene extends Phaser.Scene {
 
-    private tiles: GroupMap<TileSprite>;
-    private walls: GroupMap<WallSprite>;
-    private monsters: GroupMap<MonsterSprite>;
-    private monster: MonsterSprite;
-    private hero: HeroSprite;
+    public get tiles(): GroupMap<TileSprite> {
+        return this.data.get('tiles');
+    }
+
+    public set tiles(value: GroupMap<TileSprite>) {
+        this.data.set('tiles', value);
+    }
+
+    public get walls(): GroupMap<WallSprite> {
+        return this.data.get('walls');
+    }
+
+    public set walls(value: GroupMap<WallSprite>) {
+        this.data.set('walls', value);
+    }
+
+    public get monsters(): GroupMap<MonsterSprite> {
+        return this.data.get('monsters');
+    }
+
+    public set monsters(value: GroupMap<MonsterSprite>) {
+        this.data.set('monsters', value);
+    }
 
     private isControlsLocked = false;
     private isProcessingTurn = false;
+
+    private monstersProcessingTurns: MonsterSprite[];
 
     private cameraZoom: number;
 
@@ -29,6 +49,7 @@ export class MazeScene extends Phaser.Scene {
         this.tiles = new GroupMap(this);
         this.walls = new GroupMap(this);
         this.monsters = new GroupMap(this);
+        this.monstersProcessingTurns = [];
         this.cameraZoom = .5;
     }
 
@@ -38,7 +59,7 @@ export class MazeScene extends Phaser.Scene {
         this.load.image('boulder2', 'resource/boulder/boulder2.png');
         this.load.image('boulder3', 'resource/boulder/boulder3.png');
 
-        this.load.multiatlas( 'gernard', 'resource/monster/gernard/gernard.json', 'resource/monster/gernard/');
+        this.load.multiatlas('gernard', 'resource/monster/gernard/gernard.json', 'resource/monster/gernard/');
         this.load.multiatlas('bug3', 'resource/monster/Bug3/bug.json', 'resource/monster/Bug3/');
     }
 
@@ -59,14 +80,14 @@ export class MazeScene extends Phaser.Scene {
 
         // Create Monster
         const tile = MazeSceneHelper.getRandomTile(this.tiles);
-        const monster = new MonsterSprite(this, tile.x, tile.y, 'gernard', 'Gernard-0.png');
+        let monster = new MonsterSprite(this, tile.x, tile.y, 'gernard', 'Gernard-0.png');
         tile.monsters.add(monster.texture.key, monster);
         this.monsters.add(monster, true, 'gernard');
         this.monsters.setDepth(1001, 1);
 
-        this.monster = (<MonsterSprite>this.monsters.getChildren()[0]);
+        monster = (<MonsterSprite>this.monsters.getChildren()[0]);
 
-        this.monster.loadAnimationFrames(
+        monster.loadAnimationFrames(
             'Gernard-',
             '.png',
             'gernard',
@@ -75,32 +96,38 @@ export class MazeScene extends Phaser.Scene {
 
         const animation = this.anims.create({
             key: 'gernard-walk',
-            frames: this.monster.frameNames,
+            frames: monster.frameNames,
             frameRate: 3,
             repeat: -1
         });
 
-        this.monster.setScale(1);
+        monster.setScale(1);
 
     }
 
     update() {
 
-        if ( !this.isControlsLocked ) {
-            this.doAllCameraControls();
-            this.doPlayerCommands();
-            return;
+        if (!this.isProcessingTurn) {
+
+            if (!this.isControlsLocked) {
+                this.doAllCameraControls();
+                this.doPlayerCommands();
+                return;
+            }
+        } else {
+            this.processTurn();
         }
 
-        this.processTurn();
     }
 
     private doPlayerCommands() {
 
         if (this.turnKey.isDown) {
             this.isControlsLocked = true;
+            this.isProcessingTurn = true;
             Phaser.Actions.Call(this.tiles.getChildren(), (tile: TileSprite) => {
                 Phaser.Actions.Call(tile.monsters.toArray(), (monster: MonsterSprite) => {
+                    this.monstersProcessingTurns.push(monster);
                     monster.walkRandom(tile);
                     monster.anims.play('gernard-walk');
                 }, this);
@@ -109,7 +136,35 @@ export class MazeScene extends Phaser.Scene {
     }
 
     private processTurn() {
-            this.isProcessingTurn = true;
+        this.isProcessingTurn = true;
+
+        if (this.monstersProcessingTurns.length === 0) {
+            this.isProcessingTurn = false;
+            this.isControlsLocked = false;
+            return;
+        }
+
+        this.monstersProcessingTurns.forEach((monster, index) => {
+            switch (monster.turnDirection) {
+                case C4.N:
+                    monster.y -= 0.1;
+                    break;
+                case C4.E:
+                    monster.x += 0.1;
+                    break;
+                case C4.S:
+                    monster.y += 0.1;
+                    break;
+                case C4.W:
+                    monster.x -= 0.1;
+                    break;
+                default: break;
+            }
+
+            if (monster.x === monster.targetTile.x && monster.y === monster.targetTile.y) {
+                this.monstersProcessingTurns.splice(index, 1);
+            }
+        });
     }
 
     /**

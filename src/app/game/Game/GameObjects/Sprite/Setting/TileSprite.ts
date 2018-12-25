@@ -55,7 +55,7 @@ export class TileSprite extends Phaser.GameObjects.Sprite {
     }
 
     private getName(): string {
-        return 'mazeNode@' + '[' + this.mazeNode.getLocation().getPosition().toString() + ']';
+        return 'MazeNode@' + this.mazeNode.getName();
     }
 
     public get x(): number {
