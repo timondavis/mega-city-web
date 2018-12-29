@@ -34,12 +34,12 @@ export class TileSprite extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture);
         this.setData('walls', [null, null, null, null]);
         this.setData('mazeNode', mazeNode);
-        this.setData('monsters', new NameMap<MonsterSprite>());
+        this.setData('monsters', new Array<MonsterSprite>());
         this.setData('name', this.getName());
         this.setMazeNode(mazeNode);
     }
 
-    public get monsters(): NameMap<MonsterSprite> {
+    public get monsters(): Array<MonsterSprite> {
         return this.data.get('monsters');
     }
 

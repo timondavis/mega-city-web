@@ -1,10 +1,9 @@
 import {CharacterSprite} from './CharacterSprite';
 import {TileSprite} from '../../Setting/TileSprite';
 import {C4} from 'cm-maze';
-import {GroupMap} from '../../../GroupMap';
+import {MazeSceneHelper} from '../../../../Scene/MazeSceneHelper';
 
 export class MonsterSprite extends CharacterSprite {
-
 
     private _framePrefix: string;
     public get framePrefix(): string { return this.framePrefix; }
@@ -18,39 +17,44 @@ export class MonsterSprite extends CharacterSprite {
     private _atlasName: string;
     public get atlasName(): string { return this._atlasName; }
 
-    private _turnDirection: C4;
-    private _targetTile: TileSprite;
-
-    public get turnDirection(): C4 {
-        return this._turnDirection;
-    }
-
-    public get targetTile(): TileSprite {
-        return this._targetTile;
-    }
-
     /**
      * Walk in the given direction on the next turn
      * @param currentTile
      * @param direction
      */
-    public walk(currentTile: TileSprite, direction: C4): void {
+    public walk(currentTile: TileSprite, direction: C4): TileSprite {
         if (currentTile.getMazeNode().isConnectionPointOccupied(direction)) {
-            this._turnDirection = direction;
-            this._targetTile = this.scene.data.get('tiles').getByName(
+            const newTile = this.scene.data.get('tiles').getByName(
                 'MazeNode@' + currentTile.getMazeNode().getNeighborAt(direction).getName()
             );
+
+            const monsterIndex = currentTile.monsters.indexOf(this);
+            currentTile.monsters.splice(monsterIndex, 1);
+
+            const monsterMovement = <any[]>this.scene.data.get('monsterMovement');
+            monsterMovement.push({
+                oldTile: currentTile,
+                newTile: newTile,
+                monster: this,
+            });
+
+            return newTile;
         }
     }
 
     /**
-     * Walk in a random direction on the next turn.
+     * Walk in a random direction.
      * @param currentTile
      */
-    public walkRandom(currentTile: TileSprite): void {
-        this.walk(currentTile, Phaser.Math.RND.pick([
-            C4.E, C4.W, C4.N, C4.S
-        ]));
+    public walkRandom(currentTile: TileSprite): TileSprite {
+
+        const possibleDirections = currentTile.getMazeNode().getOccupiedConnectionPoints();
+
+        if ( possibleDirections.length ) {
+
+            const chosenDirection = Phaser.Math.RND.pick(possibleDirections);
+            return this.walk(currentTile, chosenDirection);
+        }
     }
 
     public loadAnimationFrames( framePrefix: string, frameSuffix: string, atlasName: string, start: number, stop: number) {
@@ -68,5 +72,9 @@ export class MonsterSprite extends CharacterSprite {
             suffix: frameSuffix,
         });
 
+    }
+
+    public toString(): string {
+        return this.texture.key;
     }
 }

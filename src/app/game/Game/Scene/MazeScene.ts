@@ -3,7 +3,6 @@ import {MazeNode, C4} from 'cm-maze';
 import {GroupMap} from '../GameObjects/GroupMap';
 import {TileSprite} from '../GameObjects/Sprite/Setting/TileSprite';
 import {MazeSceneHelper} from './MazeSceneHelper';
-import {HeroSprite} from '../GameObjects/Sprite/Actor/HeroSprite';
 import {MonsterSprite} from '../GameObjects/Sprite/Actor/Character/MonsterSprite';
 import {WallSprite} from '../GameObjects/Sprite/Setting/WallSprite';
 
@@ -33,10 +32,10 @@ export class MazeScene extends Phaser.Scene {
         this.data.set('monsters', value);
     }
 
-    private isControlsLocked = false;
-    private isProcessingTurn = false;
+    public get monsterMovement(): any[] {
+        return this.data.get('monsterMovement');
+    }
 
-    private monstersProcessingTurns: MonsterSprite[];
 
     private cameraZoom: number;
 
@@ -45,19 +44,20 @@ export class MazeScene extends Phaser.Scene {
     private zoomOutKey: Phaser.Input.Keyboard.Key;
     private turnKey: Phaser.Input.Keyboard.Key;
 
+    private isProcessingTurn: boolean;
+
     init() {
         this.tiles = new GroupMap(this);
         this.walls = new GroupMap(this);
         this.monsters = new GroupMap(this);
-        this.monstersProcessingTurns = [];
+        this.data.set('monsterMovement', []);
         this.cameraZoom = .5;
     }
 
     preload() {
         this.load.image('floor1', 'resource/floor/tile-floor.gif');
         this.load.image('wall1', 'resource/wall/wall1.png');
-        this.load.image('boulder2', 'resource/boulder/boulder2.png');
-        this.load.image('boulder3', 'resource/boulder/boulder3.png');
+        this.load.image('boulder2', 'resource/boulder/boulder2.png'); this.load.image('boulder3', 'resource/boulder/boulder3.png');
 
         this.load.multiatlas('gernard', 'resource/monster/gernard/gernard.json', 'resource/monster/gernard/');
         this.load.multiatlas('bug3', 'resource/monster/Bug3/bug.json', 'resource/monster/Bug3/');
@@ -81,7 +81,7 @@ export class MazeScene extends Phaser.Scene {
         // Create Monster
         const tile = MazeSceneHelper.getRandomTile(this.tiles);
         let monster = new MonsterSprite(this, tile.x, tile.y, 'gernard', 'Gernard-0.png');
-        tile.monsters.add(monster.texture.key, monster);
+        tile.monsters.push(monster);
         this.monsters.add(monster, true, 'gernard');
         this.monsters.setDepth(1001, 1);
 
@@ -106,65 +106,29 @@ export class MazeScene extends Phaser.Scene {
     }
 
     update() {
-
-        if (!this.isProcessingTurn) {
-
-            if (!this.isControlsLocked) {
-                this.doAllCameraControls();
-                this.doPlayerCommands();
-                return;
-            }
-        } else {
-            this.processTurn();
-        }
-
+        this.doAllCameraControls();
+        this.doPlayerCommands();
     }
 
+    /**
+     * Process player commands and inputs.
+     */
     private doPlayerCommands() {
 
-        if (this.turnKey.isDown) {
-            this.isControlsLocked = true;
+        if (this.turnKey.isDown && !this.isProcessingTurn) {
             this.isProcessingTurn = true;
-            Phaser.Actions.Call(this.tiles.getChildren(), (tile: TileSprite) => {
-                Phaser.Actions.Call(tile.monsters.toArray(), (monster: MonsterSprite) => {
-                    this.monstersProcessingTurns.push(monster);
-                    monster.walkRandom(tile);
-                    monster.anims.play('gernard-walk');
-                }, this);
-            }, this);
+            this.processTurn();
+        }
+        if (this.turnKey.isUp && this.isProcessingTurn) {
+            this.isProcessingTurn = false;
         }
     }
 
+    /**
+     * Process the AI turn and execute regular effects, countdowns, etc
+     */
     private processTurn() {
-        this.isProcessingTurn = true;
-
-        if (this.monstersProcessingTurns.length === 0) {
-            this.isProcessingTurn = false;
-            this.isControlsLocked = false;
-            return;
-        }
-
-        this.monstersProcessingTurns.forEach((monster, index) => {
-            switch (monster.turnDirection) {
-                case C4.N:
-                    monster.y -= 0.1;
-                    break;
-                case C4.E:
-                    monster.x += 0.1;
-                    break;
-                case C4.S:
-                    monster.y += 0.1;
-                    break;
-                case C4.W:
-                    monster.x -= 0.1;
-                    break;
-                default: break;
-            }
-
-            if (monster.x === monster.targetTile.x && monster.y === monster.targetTile.y) {
-                this.monstersProcessingTurns.splice(index, 1);
-            }
-        });
+        this.doMonsterTurnMovement();
     }
 
     /**
@@ -182,7 +146,6 @@ export class MazeScene extends Phaser.Scene {
         });
     }
 
-
     /**
      *  Temporary method to print the start and finish indicators on the map
      */
@@ -195,11 +158,38 @@ export class MazeScene extends Phaser.Scene {
     }
 
     /**
-     * Proces camera controls.  Designed for calls from the scene update loop.
+     * Process camera controls.  Designed for calls from the scene update loop.
      */
     private doAllCameraControls() {
         this.doCameraScroll();
         this.doCameraZoom();
+    }
+
+    /**
+     * Process end-of-turn movements for monsters.  Picks them up from one tile and places them
+     * on the next.
+     */
+    private doMonsterTurnMovement(): void {
+        Phaser.Actions.Call(this.tiles.getChildren(), (tile: TileSprite) => {
+            Phaser.Actions.Call(tile.monsters, (monster: MonsterSprite) => {
+                const newTile = monster.walkRandom(tile);
+                const newTilePosition = newTile.getMazeNode().getLocation().getPosition();
+                console.log(newTile);
+                console.log('x: ' + newTilePosition[0] + ', y: ' + newTilePosition[1]);
+            }, this);
+        }, this);
+
+        Phaser.Actions.Call(this.monsterMovement, (item: any) => {
+            const newTile = item.newTile;
+            const monster = item.monster;
+
+            const newNode = newTile.getMazeNode();
+            const newPosition = MazeSceneHelper.getInstance().nodeToPixel2D(newNode);
+            monster.setPosition(newPosition.x, newPosition.y);
+            newTile.monsters.push(monster);
+        }, this);
+
+        this.clearMonsterMovement();
     }
 
     /**
@@ -240,6 +230,10 @@ export class MazeScene extends Phaser.Scene {
         );
 
         this.cameras.main.setZoom(this.cameraZoom);
+    }
+
+    public clearMonsterMovement(): void {
+        this.data.set('monsterMovement', []);
     }
 }
 
